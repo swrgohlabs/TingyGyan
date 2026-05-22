@@ -1620,7 +1620,7 @@
           More than anything, we are looking forward to sharing this meaningful
           day with you. If you would like to bless Wanting and Ryan, red packets
           are warmly appreciated, though meaningful, funny, or quirky gifts are
-          welcome too.
+          welcome too. 
         </p>
       </div>
     </div>
@@ -1747,9 +1747,9 @@
       });
     }
 
-    // ── Falling leaves ────────────────────────────────────
+    // ── Falling sparkles ─────────────────────────────────
     const LEAVES = document.getElementById('leaves');
-    const SYMS   = ['✦','◇','◈','❧'];
+    const SYMS   = ['✦','✧','✶','✴'];
     for (let i = 0; i < 20; i++) {
       const el = document.createElement('div');
       el.className = 'leaf';
@@ -1759,9 +1759,9 @@
         left: ${lx}vw;
         --lx: ${(Math.random()*10 - 5).toFixed(1)}vw;
         --ex: ${(Math.random()*20 - 10).toFixed(1)}vw;
-        font-size: ${0.6 + Math.random()*0.5}rem;
+        font-size: ${0.5 + Math.random()*0.55}rem;
         opacity: 0;
-        animation-duration: ${14 + i % 9}s;
+        animation-duration: ${16 + i % 10}s;
         animation-delay: ${i * 1.1}s;
       `;
       LEAVES.appendChild(el);
