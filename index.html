@@ -30,7 +30,7 @@
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-    html { scroll-behavior: smooth; }
+    html { scroll-behavior: smooth; overflow-x: hidden; }
 
     body {
       font-family: var(--sans);
@@ -41,8 +41,8 @@
     }
 
     /* ── FONT-SIZE SCALE CLASSES ────────────────────────── */
-    html.font-lg { font-size: 112.5%; }
-    html.font-xl { font-size: 125%; }
+    html.font-lg { font-size: 150%; }
+    html.font-xl { font-size: 200%; }
 
     /* ── ACCESSIBILITY FONT-SIZE WIDGET ─────────────────── */
     .a11y-widget {
@@ -997,6 +997,9 @@
     }
 
     @media (max-width: 640px) {
+      html.font-lg { font-size: 125%; }
+      html.font-xl { font-size: 150%; }
+
       nav {
         gap: 1.2rem;
         padding: 1rem 1.5rem;
