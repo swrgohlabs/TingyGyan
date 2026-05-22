@@ -37,6 +37,7 @@
       color: var(--ink);
       background: var(--cream);
       overflow-x: hidden;
+      overflow-y: clip;
     }
 
     /* ── FONT-SIZE SCALE CLASSES ────────────────────────── */
@@ -838,11 +839,14 @@
     }
 
     /* ── FOOTER ──────────────────────────────────────────── */
+    html, body { margin-bottom: 0; padding-bottom: 0; }
+
     footer {
       background: var(--ink);
       border-top: 1px solid rgba(201,169,110,0.2);
       text-align: center;
       padding: 3rem 2rem;
+      margin: 0;
     }
     .footer-monogram {
       font-family: var(--serif);
