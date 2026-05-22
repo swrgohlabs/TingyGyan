@@ -463,7 +463,7 @@
 
     /* ── CHANGED: removed box-shadow; scale up visually without affecting layout ── */
     .about-photo img {
-      max-height: 680px;
+      max-height: 480px;
       width: auto;
       max-width: 100%;
       object-fit: contain;
@@ -481,6 +481,13 @@
       color: var(--ink);
       line-height: 1.5;
       margin-bottom: 2rem;
+    }
+
+    .about-text {
+      grid-column: 1 / -1;
+      max-width: 48rem;
+      margin-left: auto;
+      margin-right: auto;
     }
 
     .about-text p {
@@ -966,6 +973,9 @@
       transform: translateY(0);
     }
 
+    /* ── MOBILE NAV PILL ────────────────────────────────── */
+    .mobile-nav-wrap { display: none; }
+
     /* ── RESPONSIVE ──────────────────────────────────────── */
     @media (max-width: 900px) {
       .about-layout,
@@ -1002,13 +1012,101 @@
       html.font-lg { font-size: 125%; }
       html.font-xl { font-size: 150%; }
 
-      nav {
-        gap: 1.2rem;
-        padding: 1rem 1.5rem;
+      nav { display: none; }
+
+      .mobile-nav-wrap {
+        display: block;
+        position: fixed;
+        top: 1rem;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 101;
       }
 
-      nav a { display: none; }
-      nav a.nav-key { display: block; }
+      .mobile-nav-pill {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.55rem 1.25rem;
+        background: rgba(250,246,239,0.68);
+        backdrop-filter: blur(18px);
+        -webkit-backdrop-filter: blur(18px);
+        border: 1px solid rgba(201,169,110,0.4);
+        border-radius: 999px;
+        cursor: pointer;
+        font-family: var(--serif);
+        font-size: 1rem;
+        font-weight: 400;
+        font-style: italic;
+        color: var(--ink);
+        letter-spacing: 0.06em;
+        box-shadow: 0 4px 20px rgba(26,21,16,0.12);
+        transition: background 0.2s;
+        white-space: nowrap;
+        appearance: none;
+      }
+
+      .mobile-nav-pill:hover,
+      .mobile-nav-pill:focus-visible {
+        background: rgba(250,246,239,0.9);
+        outline: none;
+      }
+
+      .mobile-nav-chevron {
+        flex-shrink: 0;
+        color: var(--gold-dim);
+        transition: transform 0.25s ease;
+      }
+
+      .mobile-nav-pill[aria-expanded="true"] .mobile-nav-chevron {
+        transform: rotate(180deg);
+      }
+
+      .mobile-nav-dropdown {
+        position: absolute;
+        top: calc(100% + 0.5rem);
+        left: 50%;
+        transform: translateX(-50%) translateY(-6px);
+        min-width: 11rem;
+        background: rgba(250,246,239,0.86);
+        backdrop-filter: blur(22px);
+        -webkit-backdrop-filter: blur(22px);
+        border: 1px solid rgba(201,169,110,0.32);
+        border-radius: 14px;
+        padding: 0.4rem;
+        display: flex;
+        flex-direction: column;
+        box-shadow: 0 14px 44px rgba(26,21,16,0.14);
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.2s ease, transform 0.2s ease;
+      }
+
+      .mobile-nav-dropdown.open {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+        pointer-events: auto;
+      }
+
+      .mobile-nav-dropdown a {
+        display: block;
+        font-family: var(--sans);
+        font-size: 0.64rem;
+        font-weight: 400;
+        letter-spacing: 0.24em;
+        text-transform: uppercase;
+        color: var(--warm-mid);
+        text-decoration: none;
+        padding: 0.78rem 1.4rem;
+        border-radius: 10px;
+        text-align: center;
+        transition: background 0.15s, color 0.15s;
+      }
+
+      .mobile-nav-dropdown a:hover {
+        background: rgba(201,169,110,0.13);
+        color: var(--gold-dim);
+      }
 
       .hero-body { padding: 7rem 1.5rem 4rem; }
       .band { padding: 4rem 1.5rem; }
@@ -1162,6 +1260,26 @@
     <a href="#schedule" class="nav-key">Programme</a>
     <a href="#venue">Venue</a>
   </nav>
+
+  <!-- ── MOBILE NAV PILL ──────────────── -->
+  <div class="mobile-nav-wrap" id="mobile-nav-wrap">
+    <button class="mobile-nav-pill" id="mobile-nav-toggle"
+            aria-expanded="false" aria-controls="mobile-nav-dropdown"
+            aria-label="Navigation menu">
+      W &amp; R
+      <svg class="mobile-nav-chevron" width="10" height="6" viewBox="0 0 10 6"
+           fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.5"
+              stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </button>
+    <div class="mobile-nav-dropdown" id="mobile-nav-dropdown" aria-hidden="true">
+      <a href="#about">About</a>
+      <a href="#details">Details</a>
+      <a href="#schedule">Programme</a>
+      <a href="#venue">Venue</a>
+    </div>
+  </div>
 
   <!-- ── HERO ────────────────────────── -->
   <section class="hero">
@@ -1595,6 +1713,35 @@
       window.addEventListener('keydown', (e) => {
         if (e.key === 'Escape' && !popup.classList.contains('is-hidden')) {
           closePopup();
+        }
+      });
+    }
+
+    // ── Mobile nav pill ───────────────────────────────────
+    const mobileToggle = document.getElementById('mobile-nav-toggle');
+    const mobileDropdown = document.getElementById('mobile-nav-dropdown');
+
+    if (mobileToggle && mobileDropdown) {
+      mobileToggle.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const isOpen = mobileDropdown.classList.toggle('open');
+        mobileToggle.setAttribute('aria-expanded', isOpen);
+        mobileDropdown.setAttribute('aria-hidden', !isOpen);
+      });
+
+      mobileDropdown.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+          mobileDropdown.classList.remove('open');
+          mobileToggle.setAttribute('aria-expanded', 'false');
+          mobileDropdown.setAttribute('aria-hidden', 'true');
+        });
+      });
+
+      document.addEventListener('click', (e) => {
+        if (!mobileToggle.contains(e.target) && !mobileDropdown.contains(e.target)) {
+          mobileDropdown.classList.remove('open');
+          mobileToggle.setAttribute('aria-expanded', 'false');
+          mobileDropdown.setAttribute('aria-hidden', 'true');
         }
       });
     }
