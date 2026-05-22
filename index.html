@@ -118,21 +118,12 @@
       from { opacity: 0; }
       to   { opacity: 1; }
     }
-    @keyframes lineDraw {
-      from { transform: scaleX(0); }
-      to   { transform: scaleX(1); }
-    }
     @keyframes floatLeaf {
       0%   { transform: translate(var(--lx,0), -8vh) rotate(0deg);   opacity: 0; }
       10%  { opacity: 0.22; }
       90%  { opacity: 0.18; }
       100% { transform: translate(var(--ex,0), 108vh) rotate(360deg); opacity: 0; }
     }
-    @keyframes pulse {
-      0%,100% { opacity: 1; }
-      50%      { opacity: 0.6; }
-    }
-
     /* ── LEAVES ──────────────────────────────────────────── */
     #leaves { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
     .leaf {
@@ -876,8 +867,6 @@
     .mb-compact { margin-bottom: 2.5rem; }
     .gold-rule.center { margin: 1.5rem auto; }
 
-
-
     /* ── OPENING POPUP ───────────────────────────────────── */
     body.popup-open {
       overflow: hidden;
@@ -1186,7 +1175,7 @@
           <div class="hero-ornament-line"></div>
         </div>
 
-        <p class="hero-date">Invites you to their wedding ceremony & dinner on Saturday, the Twelfth of September, 2026</p>
+        <p class="hero-date">Invites you to their wedding ceremony &amp; dinner on Saturday, the Twelfth of September, 2026</p>
       </div>
     </div>
 
@@ -1283,9 +1272,9 @@
           <p class="about-us-tag">#GyanRoh</p>
           <p class="about-us-type">INFP / Virgo</p>
           <ul class="about-us-list">
-            <li>Likes sparkling water & root beer</li>
+            <li>Likes sparkling water &amp; root beer</li>
             <li>Rarely a morning person</li>
-            <li>Contributes to open source software for “fun” & "spite"</li>
+            <li>Contributes to open source software for “fun” &amp; “spite”</li>
           </ul>
         </article>
       </div>
@@ -1325,7 +1314,7 @@
           <span class="tile-glyph">◇</span>
           <div class="tile-label">Venue</div>
           <div class="tile-value">
-            <a href="https://www.google.com/maps/search/?api=1&query=CHIJMES%20Main%20Hall%2030%20Victoria%20St%20Singapore" target="_blank" rel="noopener">CHIJMES Main Hall</a>
+            <a href="https://www.google.com/maps/search/?api=1&amp;query=CHIJMES%20Main%20Hall%2030%20Victoria%20St%20Singapore" target="_blank" rel="noopener">CHIJMES Main Hall</a>
           </div>
         </div>
       </div>
@@ -1461,7 +1450,7 @@
         <div class="venue-info reveal">
           <p class="s-label align-start">Location</p>
           <h2>
-            <a href="https://www.google.com/maps/search/?api=1&query=CHIJMES%20Main%20Hall%2030%20Victoria%20St%20Singapore" target="_blank" rel="noopener">CHIJMES Main Hall</a>
+            <a href="https://www.google.com/maps/search/?api=1&amp;query=CHIJMES%20Main%20Hall%2030%20Victoria%20St%20Singapore" target="_blank" rel="noopener">CHIJMES Main Hall</a>
           </h2>
           <address>30 Victoria Street, Singapore 187996</address>
           <div class="gold-rule"></div>
@@ -1480,7 +1469,7 @@
           <div class="map-wrap">
             <iframe
               title="CHIJMES Main Hall"
-              src="https://www.google.com/maps?q=CHIJMES%20Main%20Hall%2030%20Victoria%20St%20Singapore&output=embed"
+              src="https://www.google.com/maps?q=CHIJMES%20Main%20Hall%2030%20Victoria%20St%20Singapore&amp;output=embed"
               loading="lazy"
               referrerpolicy="no-referrer-when-downgrade">
             </iframe>
@@ -1574,8 +1563,6 @@
   </footer>
 
   <script>
-
-
     // ── Opening popup ─────────────────────────────────────
     const popup = document.getElementById('site-popup');
     const popupClose = document.getElementById('site-popup-close');
@@ -1636,11 +1623,13 @@
       }
     }
 
+    let tickId;
     function tick() {
       const diff = TARGET - Date.now();
       const box  = document.getElementById('countdown');
       if (!box) return;
       if (diff <= 0) {
+        clearInterval(tickId);
         box.innerHTML = `<div style="grid-column:1/-1;padding:2rem;text-align:center;font-family:var(--serif);font-size:1.5rem;color:var(--gold);font-style:italic;">The celebration has begun ✦</div>`;
         return;
       }
@@ -1650,7 +1639,7 @@
       setNum('cd-secs',  Math.floor(diff / 1000)    % 60);
     }
     tick();
-    setInterval(tick, 1000);
+    tickId = setInterval(tick, 1000);
 
     // ── Scroll reveal ─────────────────────────────────────
     const io = new IntersectionObserver((entries) => {
