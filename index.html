@@ -59,7 +59,6 @@
       padding: 0.45rem 0.6rem;
       backdrop-filter: blur(12px);
       box-shadow: 0 4px 20px rgba(0,0,0,0.25);
-      transition: opacity 0.4s ease;
     }
     .a11y-widget-label {
       font-family: var(--sans);
@@ -464,7 +463,7 @@
 
     /* ── CHANGED: removed box-shadow; scale up visually without affecting layout ── */
     .about-photo img {
-      max-height: 480px;
+      max-height: 680px;
       width: auto;
       max-width: 100%;
       object-fit: contain;
@@ -482,13 +481,6 @@
       color: var(--ink);
       line-height: 1.5;
       margin-bottom: 2rem;
-    }
-
-    .about-text {
-      grid-column: 1 / -1;
-      max-width: 48rem;
-      margin-left: auto;
-      margin-right: auto;
     }
 
     .about-text p {
@@ -939,6 +931,76 @@
       cursor: pointer;
     }
 
+    .popup-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      align-items: center;
+    }
+
+    .popup-actions .btn-primary {
+      width: 100%;
+      justify-content: center;
+    }
+
+    .btn-outline-popup {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      padding: 0.9rem 2.4rem;
+      background: transparent;
+      color: var(--warm-mid);
+      font-family: var(--sans);
+      font-size: 0.62rem;
+      font-weight: 400;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border: 1px solid var(--border);
+      border-radius: 1px;
+      cursor: pointer;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .btn-outline-popup:hover {
+      border-color: var(--gold-dim);
+      color: var(--ink);
+    }
+
+    /* ── FOOD NUDGE STRIP ───────────────────────────────── */
+    .food-nudge {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.75rem;
+      padding: 0.85rem 2rem;
+      background: rgba(201,169,110,0.12);
+      border-top: 1px solid rgba(201,169,110,0.3);
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+    .food-nudge:hover {
+      background: rgba(201,169,110,0.2);
+    }
+    .food-nudge-text {
+      font-family: var(--sans);
+      font-size: 0.62rem;
+      font-weight: 400;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--gold-pale);
+    }
+    .food-nudge-arrow {
+      font-size: 0.85rem;
+      color: var(--gold);
+      transition: transform 0.2s;
+    }
+    .food-nudge:hover .food-nudge-arrow {
+      transform: translateX(4px);
+    }
+
     /* ── SECTION TRANSITIONS ─────────────────────────────── */
     .s-transition {
       --transition-h: 100vh;
@@ -973,9 +1035,6 @@
       opacity: 1;
       transform: translateY(0);
     }
-
-    /* ── MOBILE NAV PILL ────────────────────────────────── */
-    .mobile-nav-wrap { display: none; }
 
     /* ── RESPONSIVE ──────────────────────────────────────── */
     @media (max-width: 900px) {
@@ -1013,101 +1072,13 @@
       html.font-lg { font-size: 125%; }
       html.font-xl { font-size: 150%; }
 
-      nav { display: none; }
-
-      .mobile-nav-wrap {
-        display: block;
-        position: fixed;
-        top: 1rem;
-        left: 50%;
-        transform: translateX(-50%);
-        z-index: 101;
+      nav {
+        gap: 1.2rem;
+        padding: 1rem 1.5rem;
       }
 
-      .mobile-nav-pill {
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-        padding: 0.55rem 1.25rem;
-        background: rgba(250,246,239,0.68);
-        backdrop-filter: blur(18px);
-        -webkit-backdrop-filter: blur(18px);
-        border: 1px solid rgba(201,169,110,0.4);
-        border-radius: 999px;
-        cursor: pointer;
-        font-family: var(--serif);
-        font-size: 1rem;
-        font-weight: 400;
-        font-style: italic;
-        color: var(--ink);
-        letter-spacing: 0.06em;
-        box-shadow: 0 4px 20px rgba(26,21,16,0.12);
-        transition: background 0.2s;
-        white-space: nowrap;
-        appearance: none;
-      }
-
-      .mobile-nav-pill:hover,
-      .mobile-nav-pill:focus-visible {
-        background: rgba(250,246,239,0.9);
-        outline: none;
-      }
-
-      .mobile-nav-chevron {
-        flex-shrink: 0;
-        color: var(--gold-dim);
-        transition: transform 0.25s ease;
-      }
-
-      .mobile-nav-pill[aria-expanded="true"] .mobile-nav-chevron {
-        transform: rotate(180deg);
-      }
-
-      .mobile-nav-dropdown {
-        position: absolute;
-        top: calc(100% + 0.5rem);
-        left: 50%;
-        transform: translateX(-50%) translateY(-6px);
-        min-width: 11rem;
-        background: rgba(250,246,239,0.86);
-        backdrop-filter: blur(22px);
-        -webkit-backdrop-filter: blur(22px);
-        border: 1px solid rgba(201,169,110,0.32);
-        border-radius: 14px;
-        padding: 0.4rem;
-        display: flex;
-        flex-direction: column;
-        box-shadow: 0 14px 44px rgba(26,21,16,0.14);
-        opacity: 0;
-        pointer-events: none;
-        transition: opacity 0.2s ease, transform 0.2s ease;
-      }
-
-      .mobile-nav-dropdown.open {
-        opacity: 1;
-        transform: translateX(-50%) translateY(0);
-        pointer-events: auto;
-      }
-
-      .mobile-nav-dropdown a {
-        display: block;
-        font-family: var(--sans);
-        font-size: 0.64rem;
-        font-weight: 400;
-        letter-spacing: 0.24em;
-        text-transform: uppercase;
-        color: var(--warm-mid);
-        text-decoration: none;
-        padding: 0.78rem 1.4rem;
-        border-radius: 10px;
-        text-align: center;
-        transition: background 0.15s, color 0.15s;
-      }
-
-      .mobile-nav-dropdown a:hover {
-        background: rgba(201,169,110,0.13);
-        color: var(--gold-dim);
-      }
+      nav a { display: none; }
+      nav a.nav-key { display: block; }
 
       .hero-body { padding: 7rem 1.5rem 4rem; }
       .band { padding: 4rem 1.5rem; }
@@ -1239,16 +1210,21 @@
   <!-- ── OPENING POPUP ─────────────────── -->
   <div class="site-popup" id="site-popup" role="dialog" aria-modal="true" aria-labelledby="site-popup-title">
     <div class="site-popup-card">
-      <p class="s-label">Before You Begin</p>
-      <h2 id="site-popup-title">Please scroll through the full site</h2>
+      <p class="s-label">Welcome</p>
+      <h2 id="site-popup-title">Wanting &amp; Ryan</h2>
       <p>
-        We have arranged the wedding details section by section. Please scroll
-        all the way through so you do not miss the RSVP, dress code, schedule,
-        venue, and FAQ.
+        Before you explore the wedding details, please take a moment to fill in
+        your food &amp; dietary preferences — it takes under a minute and helps
+        us look after you on the night.
       </p>
-      <button class="btn-primary site-popup-btn" id="site-popup-close" type="button">
-        Start Scrolling →
-      </button>
+      <div class="popup-actions">
+        <a class="btn-primary site-popup-btn" href="/food/" role="button">
+          Food &amp; Menu Selection →
+        </a>
+        <button class="btn-outline-popup" id="site-popup-close" type="button">
+          Continue to Wedding Site
+        </button>
+      </div>
     </div>
   </div>
 
@@ -1261,26 +1237,6 @@
     <a href="#schedule" class="nav-key">Programme</a>
     <a href="#venue">Venue</a>
   </nav>
-
-  <!-- ── MOBILE NAV PILL ──────────────── -->
-  <div class="mobile-nav-wrap" id="mobile-nav-wrap">
-    <button class="mobile-nav-pill" id="mobile-nav-toggle"
-            aria-expanded="false" aria-controls="mobile-nav-dropdown"
-            aria-label="Navigation menu">
-      W &amp; R
-      <svg class="mobile-nav-chevron" width="10" height="6" viewBox="0 0 10 6"
-           fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        <path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.5"
-              stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
-    </button>
-    <div class="mobile-nav-dropdown" id="mobile-nav-dropdown" aria-hidden="true">
-      <a href="#about">About</a>
-      <a href="#details">Details</a>
-      <a href="#schedule">Programme</a>
-      <a href="#venue">Venue</a>
-    </div>
-  </div>
 
   <!-- ── HERO ────────────────────────── -->
   <section class="hero">
@@ -1327,6 +1283,12 @@
         <div class="countdown-lbl">Seconds</div>
       </div>
     </div>
+
+    <!-- Food preferences nudge -->
+    <a href="/food/" class="food-nudge">
+      <span class="food-nudge-text">Fill in your food &amp; dietary preferences</span>
+      <span class="food-nudge-arrow">→</span>
+    </a>
   </section>
 
   <!-- T1: dark → parchment -->
@@ -1620,7 +1582,7 @@
           More than anything, we are looking forward to sharing this meaningful
           day with you. If you would like to bless Wanting and Ryan, red packets
           are warmly appreciated, though meaningful, funny, or quirky gifts are
-          welcome too. 
+          welcome too.
         </p>
       </div>
     </div>
@@ -1718,38 +1680,9 @@
       });
     }
 
-    // ── Mobile nav pill ───────────────────────────────────
-    const mobileToggle = document.getElementById('mobile-nav-toggle');
-    const mobileDropdown = document.getElementById('mobile-nav-dropdown');
-
-    if (mobileToggle && mobileDropdown) {
-      mobileToggle.addEventListener('click', (e) => {
-        e.stopPropagation();
-        const isOpen = mobileDropdown.classList.toggle('open');
-        mobileToggle.setAttribute('aria-expanded', isOpen);
-        mobileDropdown.setAttribute('aria-hidden', !isOpen);
-      });
-
-      mobileDropdown.querySelectorAll('a').forEach(link => {
-        link.addEventListener('click', () => {
-          mobileDropdown.classList.remove('open');
-          mobileToggle.setAttribute('aria-expanded', 'false');
-          mobileDropdown.setAttribute('aria-hidden', 'true');
-        });
-      });
-
-      document.addEventListener('click', (e) => {
-        if (!mobileToggle.contains(e.target) && !mobileDropdown.contains(e.target)) {
-          mobileDropdown.classList.remove('open');
-          mobileToggle.setAttribute('aria-expanded', 'false');
-          mobileDropdown.setAttribute('aria-hidden', 'true');
-        }
-      });
-    }
-
-    // ── Falling sparkles ─────────────────────────────────
+    // ── Falling leaves ────────────────────────────────────
     const LEAVES = document.getElementById('leaves');
-    const SYMS   = ['✦','✧','✶','✴'];
+    const SYMS   = ['✦','◇','◈','❧'];
     for (let i = 0; i < 20; i++) {
       const el = document.createElement('div');
       el.className = 'leaf';
@@ -1759,9 +1692,9 @@
         left: ${lx}vw;
         --lx: ${(Math.random()*10 - 5).toFixed(1)}vw;
         --ex: ${(Math.random()*20 - 10).toFixed(1)}vw;
-        font-size: ${0.5 + Math.random()*0.55}rem;
+        font-size: ${0.6 + Math.random()*0.5}rem;
         opacity: 0;
-        animation-duration: ${16 + i % 10}s;
+        animation-duration: ${14 + i % 9}s;
         animation-delay: ${i * 1.1}s;
       `;
       LEAVES.appendChild(el);
@@ -1853,26 +1786,6 @@
     window.addEventListener('scroll', onScroll, { passive: true });
     window.addEventListener('resize', updateShutters, { passive: true });
     updateShutters();
-
-    // ── A11y widget fade when countdown is visible ────────
-    (function () {
-      const widget = document.querySelector('.a11y-widget');
-      const countdown = document.getElementById('countdown');
-      if (!widget || !countdown) return;
-      function updateWidgetOpacity() {
-        const r = countdown.getBoundingClientRect();
-        const vh = window.innerHeight;
-        // How far the countdown's bottom edge has moved up from the viewport bottom.
-        // 0 = sitting right at the bottom; fadeZone = fully faded in.
-        const fadeZone = 80;
-        const scrolledUp = vh - r.bottom;
-        const t = Math.min(1, Math.max(0, scrolledUp / fadeZone));
-        widget.style.opacity = t.toFixed(3);
-      }
-      window.addEventListener('scroll', updateWidgetOpacity, { passive: true });
-      window.addEventListener('resize', updateWidgetOpacity, { passive: true });
-      updateWidgetOpacity();
-    })();
 
     // ── Font-size accessibility toggle ────────────────────
     (function () {
