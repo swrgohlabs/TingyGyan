@@ -49,6 +49,26 @@
       background-size: 256px 256px;
     }
 
+    /* ── BACK LINK ───────────────────────────────────────── */
+    .back-link {
+      display: block;
+      background: var(--ink);
+      border-bottom: 1px solid rgba(201,169,110,0.12);
+      padding: 0.65rem 1.5rem;
+      text-align: left;
+    }
+    .back-link a {
+      font-family: var(--sans);
+      font-size: 0.58rem;
+      font-weight: 400;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: rgba(201,169,110,0.55);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .back-link a:hover { color: var(--gold); }
+
     /* ── HEADER ──────────────────────────────────────────── */
     header {
       background: var(--ink);
@@ -175,6 +195,8 @@
 </head>
 
 <body>
+
+  <div class="back-link"><a href="/">← Wedding Site</a></div>
 
   <header>
     <p class="header-eyebrow">12 September 2026</p>
