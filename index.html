@@ -967,6 +967,27 @@
       color: var(--ink);
     }
 
+    .btn-ghost-popup {
+      appearance: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-family: var(--sans);
+      font-size: 0.6rem;
+      font-weight: 300;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--warm-mid);
+      padding: 0.4rem 0.5rem;
+      text-decoration: underline;
+      text-decoration-color: transparent;
+      transition: color 0.2s, text-decoration-color 0.2s;
+    }
+    .btn-ghost-popup:hover {
+      color: var(--ink);
+      text-decoration-color: var(--border);
+    }
+
     /* ── FOOD NUDGE STRIP ───────────────────────────────── */
     .food-nudge {
       position: relative;
@@ -1213,15 +1234,17 @@
       <p class="s-label">Welcome</p>
       <h2 id="site-popup-title">Wanting &amp; Ryan</h2>
       <p>
-        Before you explore the wedding details, please take a moment to fill in
-        your food &amp; dietary preferences — it takes under a minute and helps
-        us look after you on the night.
+        Before you explore the wedding details, please RSVP and let us know
+        your food preferences — it only takes a minute.
       </p>
       <div class="popup-actions">
-        <a class="btn-primary site-popup-btn" href="/food/" role="button">
-          Food &amp; Menu Selection →
+        <a class="btn-primary site-popup-btn" href="/rsvp/" role="button">
+          RSVP Now →
         </a>
-        <button class="btn-outline-popup" id="site-popup-close" type="button">
+        <a class="btn-primary site-popup-btn" href="/food/" role="button">
+          Food Preferences (already RSVP'd) →
+        </a>
+        <button class="btn-ghost-popup" id="site-popup-close" type="button">
           Continue to Wedding Site
         </button>
       </div>
@@ -1231,11 +1254,11 @@
 
   <!-- ── NAV ─────────────────────────── -->
   <nav aria-label="Page navigation">
-    <a href="#about">About</a>
     <a href="#details">Details</a>
+    <a href="#schedule">Programme</a>
     <span class="nav-monogram">W &amp; R</span>
-    <a href="#schedule" class="nav-key">Programme</a>
-    <a href="#venue">Venue</a>
+    <a href="/rsvp/" class="nav-key">RSVP</a>
+    <a href="/food/" class="nav-key">Food</a>
   </nav>
 
   <!-- ── HERO ────────────────────────── -->
@@ -1418,26 +1441,25 @@
   <section class="band rsvp-band" id="rsvp">
     <div class="band-inner">
       <p class="s-label reveal">Reserve Your Seat</p>
-      <h2 class="s-title reveal">Kindly RSVP</h2>
+      <h2 class="s-title reveal">Kindly RSVP &amp; Select Your Food</h2>
 
       <div class="rsvp-card reveal">
         <p>
-          Please let us know whether you will be joining the celebration so we
-          can ensure a seat is lovingly reserved for you.
+          Please let us know whether you will be joining the celebration and
+          share your food preferences so we can look after you on the night.
         </p>
-
-        <div class="notion-form-wrap">
-          <iframe
-            title="Wedding RSVP Form"
-            src="https://docs.google.com/forms/d/e/1FAIpQLSfO_Y00lGCyqSOWs0dDefEPOhIr0PhZXvTEAasH_3P4AV2Kjw/viewform?embedded=true"
-            loading="lazy">
-          </iframe>
+        <div style="display:flex;flex-direction:column;gap:0.75rem;align-items:center;">
+          <a class="btn-primary" href="/rsvp/" style="width:100%;justify-content:center;">
+            RSVP Now →
+          </a>
+          <a class="btn-primary" href="/food/" style="width:100%;justify-content:center;">
+            Select Food (already RSVP'd) →
+          </a>
         </div>
-
-        <p class="rsvp-updates-note">
+        <p class="rsvp-updates-note mt-1">
           Join our WhatsApp group below for more updates.
         </p>
-        <a class="btn-primary" href="https://chat.whatsapp.com/FwJ2ms023jG5fiT12P279D" target="_blank" rel="noopener">
+        <a class="btn-primary mt-half" href="https://chat.whatsapp.com/FwJ2ms023jG5fiT12P279D" target="_blank" rel="noopener">
           Join WhatsApp Group →
         </a>
       </div>
